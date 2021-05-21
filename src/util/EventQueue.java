@@ -44,7 +44,7 @@ public class EventQueue<T> implements Runnable
    *
    * @param process The process to call for each event in the queue.
    */
-  public EventQueue(EventProcess<T> process)
+	public EventQueue(EventProcess<T> process)
   {
     this(process, DEFAULT_QUEUE_ms);
   }

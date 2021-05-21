@@ -4,211 +4,211 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SYNCCOMRegisters {
-	static long[] __reserved1 = { -1, -1 };
-	static long FIFOT = -1;
-	static long[] __reserved2 = { -1, -1 };
-	static long CMDR = -1;
-	static long STAR = -1; /* Read-only */
-	static long CCR0 = -1;
-	static long CCR1 = -1;
-	static long CCR2 = -1;
-	static long BGR = -1;
-	static long SSR = -1;
-	static long SMR = -1;
-	static long TSR = -1;
-	static long TMR = -1;
-	static long RAR = -1;
-	static long RAMR = -1;
-	static long PPR = -1;
-	static long TCR = -1;
-	static long VSTR = -1; /* Read-only */
-	static long[] __reserved4 = { -1 };
-	static long IMR = -1;
-	static long DPLLR = -1;
-	static long FCR = -1;
+	public long[] __reserved1 = { -1, -1 };
+	public long FIFOT = -1;
+	public long[] __reserved2 = { -1, -1 };
+	public long CMDR = -1;
+	public long STAR = -1; /* Read-only */
+	public long CCR0 = -1;
+	public long CCR1 = -1;
+	public long CCR2 = -1;
+	public long BGR = -1;
+	public long SSR = -1;
+	public long SMR = -1;
+	public long TSR = -1;
+	public long TMR = -1;
+	public long RAR = -1;
+	public long RAMR = -1;
+	public long PPR = -1;
+	public long TCR = -1;
+	public long VSTR = -1; /* Read-only */
+	public long[] __reserved4 = { -1 };
+	public long IMR = -1;
+	public long DPLLR = -1;
+	public long FCR = -1;
 
-	public static long[] get__reserved1() {
+	public long[] get__reserved1() {
 		return __reserved1;
 	}
 
-	public static void set__reserved1(long[] c__reserved1) {
+	public void set__reserved1(long[] c__reserved1) {
 		__reserved1 = c__reserved1;
 	}
 
-	public static long getFIFOT() {
+	public long getFIFOT() {
 		return FIFOT;
 	}
 
-	public static void setFIFOT(long fIFOT) {
+	public void setFIFOT(long fIFOT) {
 		FIFOT = fIFOT;
 	}
 
-	public static long[] get__reserved2() {
+	public long[] get__reserved2() {
 		return __reserved2;
 	}
 
-	public static void set__reserved2(long[] c__reserved2) {
+	public void set__reserved2(long[] c__reserved2) {
 		__reserved2 = c__reserved2;
 	}
 
-	public static long getCMDR() {
+	public long getCMDR() {
 		return CMDR;
 	}
 
-	public static void setCMDR(long cMDR) {
+	public void setCMDR(long cMDR) {
 		CMDR = cMDR;
 	}
 
-	public static long getSTAR() {
+	public long getSTAR() {
 		return STAR;
 	}
 
-	public static void setSTAR(long sTAR) {
+	public void setSTAR(long sTAR) {
 		STAR = sTAR;
 	}
 
-	public static long getCCR0() {
+	public long getCCR0() {
 		return CCR0;
 	}
 
-	public static void setCCR0(long cCR0) {
+	public void setCCR0(long cCR0) {
 		CCR0 = cCR0;
 	}
 
-	public static long getCCR1() {
+	public long getCCR1() {
 		return CCR1;
 	}
 
-	public static void setCCR1(long cCR1) {
+	public void setCCR1(long cCR1) {
 		CCR1 = cCR1;
 	}
 
-	public static long getCCR2() {
+	public long getCCR2() {
 		return CCR2;
 	}
 
-	public static void setCCR2(long cCR2) {
+	public void setCCR2(long cCR2) {
 		CCR2 = cCR2;
 	}
 
-	public static long getBGR() {
+	public long getBGR() {
 		return BGR;
 	}
 
-	public static void setBGR(long bGR) {
+	public void setBGR(long bGR) {
 		BGR = bGR;
 	}
 
-	public static long getSSR() {
+	public long getSSR() {
 		return SSR;
 	}
 
-	public static void setSSR(long sSR) {
+	public void setSSR(long sSR) {
 		SSR = sSR;
 	}
 
-	public static long getSMR() {
+	public long getSMR() {
 		return SMR;
 	}
 
-	public static void setSMR(long sMR) {
+	public void setSMR(long sMR) {
 		SMR = sMR;
 	}
 
-	public static long getTSR() {
+	public long getTSR() {
 		return TSR;
 	}
 
-	public static void setTSR(long tSR) {
+	public void setTSR(long tSR) {
 		TSR = tSR;
 	}
 
-	public static long getTMR() {
+	public long getTMR() {
 		return TMR;
 	}
 
-	public static void setTMR(long tMR) {
+	public void setTMR(long tMR) {
 		TMR = tMR;
 	}
 
-	public static long getRAR() {
+	public long getRAR() {
 		return RAR;
 	}
 
-	public static void setRAR(long rAR) {
+	public void setRAR(long rAR) {
 		RAR = rAR;
 	}
 
-	public static long getRAMR() {
+	public long getRAMR() {
 		return RAMR;
 	}
 
-	public static void setRAMR(long rAMR) {
+	public void setRAMR(long rAMR) {
 		RAMR = rAMR;
 	}
 
-	public static long getPPR() {
+	public long getPPR() {
 		return PPR;
 	}
 
-	public static void setPPR(long pPR) {
+	public void setPPR(long pPR) {
 		PPR = pPR;
 	}
 
-	public static long getTCR() {
+	public long getTCR() {
 		return TCR;
 	}
 
-	public static void setTCR(long tCR) {
+	public void setTCR(long tCR) {
 		TCR = tCR;
 	}
 
-	public static long getVSTR() {
+	public long getVSTR() {
 		return VSTR;
 	}
 
-	public static void setVSTR(long vSTR) {
+	public void setVSTR(long vSTR) {
 		VSTR = vSTR;
 	}
 
-	public static long[] get__reserved4() {
+	public long[] get__reserved4() {
 		return __reserved4;
 	}
 
-	public static void set__reserved4(long[] c__reserved4) {
+	public void set__reserved4(long[] c__reserved4) {
 		__reserved4 = c__reserved4;
 	}
 
-	public static long getIMR() {
+	public long getIMR() {
 		return IMR;
 	}
 
-	public static void setIMR(long iMR) {
+	public void setIMR(long iMR) {
 		IMR = iMR;
 	}
 
-	public static long getDPLLR() {
+	public long getDPLLR() {
 		return DPLLR;
 	}
 
-	public static void setDPLLR(long dPLLR) {
+	public void setDPLLR(long dPLLR) {
 		DPLLR = dPLLR;
 	}
 
-	public static long getFCR() {
+	public long getFCR() {
 		return FCR;
 	}
 
-	public static void setFCR(long fCR) {
+	public void setFCR(long fCR) {
 		FCR = fCR;
 	}
 
-	public static List<Object> getRegisters() {
+	public List<Object> getRegisters() {
 		return new ArrayList<Object>() {
 			/**
 			 * 
 			 */
-			private static final long serialVersionUID = 1L;
+			private final long serialVersionUID = 1L;
 			{
 				add(__reserved1);
 				add(FIFOT);

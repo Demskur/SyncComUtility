@@ -11,31 +11,38 @@ import controlador.ControllerFx;
 import controlador.ControllerFx.QueueEvent;
 import controlador.ControllerFx.QueueEvent.QueueEventType;
 import dll.SYNCCOM_Loader;
-import util.FastcomUtil;
 import util.EventQueue;
 
 /**
  * @author fpinilla
  *
  */
-public class SerialThread implements EventQueue.EventProcess<ControllerFx.QueueEvent> {
+public class SerialThread {
 	Logger log = Logger.getLogger(this.getClass().getName());
+	Timer timer;
 
-	public SerialThread(String thrdname, long milliseconds) {
+	public SerialThread(String thrdname, long milliseconds, EventQueue<ControllerFx.QueueEvent> equeue) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				byte[] data = SYNCCOM_Loader.read();
-				System.out.println(new String(data));
-				if (data != null)
-					process(new QueueEvent(QueueEventType.READ, data, thrdname));					
+				try {
+					byte[] data = SYNCCOM_Loader.read();
+					if (data != null) {
+						System.out.println(new String(data));
+						equeue.add(new QueueEvent(QueueEventType.READ, data, thrdname));
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		}, milliseconds);
+		}, 0, milliseconds);
+
 	}
 
-	@Override
-	public void process(QueueEvent event) {
+	public void stop() {
+		if (timer != null)
+			timer.cancel();
 	}
 
 }

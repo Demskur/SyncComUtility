@@ -5,6 +5,8 @@ package dll;
 
 import java.util.ArrayList;
 
+import synccom.SYNCCOMRegisters;
+
 /**
  * @author fpinilla
  *
@@ -22,13 +24,13 @@ public class SYNCCOM_Loader {
 
 	public static native byte[] readWithTimeout(int timeout);
 
-	public static native void write(byte[] data);
+	public static native int write(byte[] data);
 
 	public static native boolean setClockFrequency(long hz);
 
 	public static native ArrayList<Object> SYNCCOM_GET_REGISTERS();
 
-	public static native void SYNCCOM_SET_REGISTERS(ArrayList<Object> registers);
+	public static native void SYNCCOM_SET_REGISTERS(SYNCCOMRegisters registers);//ArrayList<Object> registers);
 
 	public static native void SYNCCOM_PURGE_TX();
 

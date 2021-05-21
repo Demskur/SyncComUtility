@@ -34,7 +34,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -96,7 +98,7 @@
       <items>
         <AnchorPane>
           <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Conexion" textAlignment="CENTER" wrapText="false">
+            <Label alignment="CENTER" layoutY="1.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Conexion" textAlignment="CENTER" wrapText="false">
               <font>
                 <Font size="18.0" fx:id="x1" />
               </font>
@@ -116,9 +118,10 @@
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
+                        <CheckBox fx:id="checkLF" layoutX="64.0" layoutY="523.0" mnemonicParsing="false" onAction="#onCheckLFClick" text="LF" />
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Monitor" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <TextField fx:id="monitorWrite" layoutX="14.0" layoutY="496.0" onAction="#onWriteAction" prefHeight="33.0" prefWidth="334.0" />
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="464.0" style="&#10;" text="Envio" textAlignment="CENTER" wrapText="false">
+                        <TextField fx:id="monitorWrite" layoutX="15.0" layoutY="480.0" onAction="#onWriteAction" prefHeight="33.0" prefWidth="334.0" />
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="452.0" style="&#10;" text="Envio" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" fx:id="x11" />
                            </font>
@@ -126,8 +129,18 @@
                               <Color red="0.624" green="0.624" blue="0.624" fx:id="x21" />
                            </textFill>
                         </Label>
-                        <Button fx:id="monitorSend" defaultButton="true" layoutX="352.0" layoutY="496.0" mnemonicParsing="false" onAction="#onSendAction" prefHeight="33.0" prefWidth="64.0" text="Enviar" />
-                        <TextArea fx:id="monitorRead" layoutX="15.0" layoutY="41.0" prefHeight="411.0" prefWidth="400.0" />
+                        <Button fx:id="monitorSend" defaultButton="true" layoutX="352.0" layoutY="479.0" mnemonicParsing="false" onAction="#onSendAction" prefHeight="33.0" prefWidth="64.0" text="Enviar" />
+                        <TextArea fx:id="monitorRead" editable="false" layoutX="15.0" layoutY="41.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="411.0" prefWidth="400.0" wrapText="true">
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem fx:id="menuLimpiar" mnemonicParsing="false" onAction="#onContextMenuLimpiar" text="Limpiar" />
+                                    <MenuItem fx:id="menuCopiar" mnemonicParsing="false" onAction="#onContextMenuCopiar" text="Copiar" />
+                                    <MenuItem fx:id="menuSeleccionar" mnemonicParsing="false" onAction="#onContextMenuSeleccionar" text="Seleccionar Todo" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></TextArea>
+                        <CheckBox fx:id="checkCR" layoutX="19.0" layoutY="523.0" mnemonicParsing="false" onAction="#onCheckCRClick" text="CR" />
               </children>
             </AnchorPane>
           </content>

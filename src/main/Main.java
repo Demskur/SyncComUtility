@@ -3,37 +3,39 @@ package main;
 import controlador.ControllerFx;
 import dll.SYNCCOM_Loader;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import util.EventQueue;
 
 public class Main extends Application {
 
 	public static void main(String[] args) {
 		SYNCCOM_Loader.init();
-//		try {
-//			SYNCCOM_Loader.init();
-//			Thread.sleep(1000);
-//			SYNCCOM_Loader.write("hola".getBytes());
-//			Thread.sleep(1000);			
-//			String msj = new String(SYNCCOM_Loader.read());
-//			System.out.println(msj);
-//			//SYNCCOM_Loader.garbageC();
-//
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
 		Application.launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		var panePrincipal = (Pane) FXMLLoader.load(Main.class.getResource("/fx/principal.fxml"));
-		primaryStage.setScene(new Scene(panePrincipal));
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fx/principal.fxml"));
+		Parent rootPane = loader.load();
+		primaryStage.setScene(new Scene(rootPane));
 		primaryStage.show();
-		SerialThread thread = new SerialThread(null, 300);
-		EventQueue<ControllerFx.QueueEvent> equeue = new EventQueue<ControllerFx.QueueEvent>(thread);
+		ControllerFx controller = (ControllerFx) loader.getController();
+		EventQueue<ControllerFx.QueueEvent> equeue = new EventQueue<ControllerFx.QueueEvent>(controller);
+		SerialThread serialThread = new SerialThread(null, 100, equeue);
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent e) {
+				serialThread.stop();
+				SYNCCOM_Loader.close();
+				Platform.exit();
+				System.exit(0);
+			}
+		});
 	}
 }
