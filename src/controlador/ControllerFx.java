@@ -26,7 +26,7 @@ import synccom.SYNCCOMRegisters;
 import util.EventQueue;
 
 public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueEvent> {
-	Logger Log = Logger.getLogger(this.getClass().getName());
+	Logger log = Logger.getLogger(this.getClass().getName());
 
 	public static class QueueEvent {
 		public enum QueueEventType {
@@ -90,6 +90,12 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	private MenuItem menuSeleccionar;
 
 	@FXML
+	private TextField clockFrequency;
+
+	@FXML
+	private Button loadPresets;
+
+	@FXML
 	void onClockListDrag(MouseEvent event) {
 	}
 
@@ -97,11 +103,19 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	void onSendAction(ActionEvent event) {
 		String data = monitorWrite.getText();
 		SYNCCOM_Loader.write(data.getBytes());
-		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(new SYNCCOMRegisters());
-		if (SYNCCOM_Loader.setClockFrequency(18432000))
-			System.out.println("Exito al cambiar clock");
-		else 
-			System.out.println("Error al cambiar clock");
+
+	}
+
+	@FXML
+	void onLoadPresets(ActionEvent event) {
+		try {
+			if (SYNCCOM_Loader.setClockFrequency(Long.parseLong(clockFrequency.getText()))) { // 18432000
+				log.fine("Exito al cambiar clock");
+			} else
+				log.warning("Error al cambiar clock");
+		} catch (NumberFormatException e) {
+			log.warning("Valor invalido");
+		}
 	}
 
 	@FXML

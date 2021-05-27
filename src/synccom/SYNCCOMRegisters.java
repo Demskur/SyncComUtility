@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SYNCCOMRegisters {
-	public long[] __reserved1 = { -1, -1 };
+	public long[] __reserved1 = { -1, -1 };	
 	public long FIFOT = -1;
 	public long[] __reserved2 = { -1, -1 };
 	public long CMDR = -1;

@@ -110,6 +110,9 @@
                      <children>
                         <Label text="Clock Mode" />
                         <ChoiceBox fx:id="clockList" onDragDetected="#onClockListDrag" prefHeight="25.0" prefWidth="195.0" />
+                        <Label text="Clock Frequency (1Mhz-50Mhz)" />
+                        <TextField fx:id="clockFrequency" />
+                        <Button fx:id="loadPresets" mnemonicParsing="false" onAction="#onLoadPresets" prefHeight="22.0" prefWidth="196.0" text="Configurar" />
                      </children>
                   </VBox>
           </children>
