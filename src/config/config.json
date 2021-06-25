@@ -1,0 +1,21 @@
+{
+	"REGISTERS": {
+		"CCR0": {
+			"TRANSMISSION_MODE": {
+				"ENABLE_HDCL": 0,
+				"ENABLE_X_SYNC": 0,
+				"ENABLE_TRANSPARENT": 0
+			},
+			"CLOCK_MODE": {
+				"CLOCK_MODE_0": 0,
+				"CLOCK_MODE_1": 1,
+				"CLOCK_MODE_2": 2,
+				"CLOCK_MODE_3": 3,
+				"CLOCK_MODE_4": 4,
+				"CLOCK_MODE_5": 5,
+				"CLOCK_MODE_6": 6,
+				"CLOCK_MODE_7": 7
+			}
+		}
+	}
+}

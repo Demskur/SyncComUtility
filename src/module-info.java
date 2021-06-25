@@ -11,9 +11,14 @@ module fastcom_test {
 	requires javafx.controls;
 	requires javafx.base;
 	requires javafx.fxml;
-	requires java.logging;	
+	requires java.logging;
+	requires java.xml.bind;
+	requires java.xml;
+	requires com.fasterxml.jackson.databind;
+
 	exports main to javafx.fxml, javafx.graphics;
 	exports controlador to javafx.fxml, javafx.graphics;
+
 	opens util;
-	opens controlador;	
+	opens controlador;
 }

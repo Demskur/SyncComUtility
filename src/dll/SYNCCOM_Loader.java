@@ -3,6 +3,8 @@
  */
 package dll;
 
+import java.io.File;
+import java.io.File;
 import java.util.ArrayList;
 
 import synccom.SYNCCOMRegisters;
@@ -13,11 +15,12 @@ import synccom.SYNCCOMRegisters;
  */
 public class SYNCCOM_Loader {
 	static {
-		System.loadLibrary("fastcomdll");
+		File dll = new File(SYNCCOM_Loader.class.getResource("/dll/fastcomdll.dll").getFile());
+		System.load(dll.getAbsolutePath());
 	}
-	
+
 	public static native int init();
-	
+
 	public static native void close();
 
 	public static native byte[] read();
@@ -30,7 +33,7 @@ public class SYNCCOM_Loader {
 
 	public static native ArrayList<Object> SYNCCOM_GET_REGISTERS();
 
-	public static native void SYNCCOM_SET_REGISTERS(SYNCCOMRegisters registers);//ArrayList<Object> registers);
+	public static native void SYNCCOM_SET_REGISTERS(SYNCCOMRegisters registers);// ArrayList<Object> registers);
 
 	public static native void SYNCCOM_PURGE_TX();
 

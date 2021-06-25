@@ -12,15 +12,16 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import synccom.SYNCCOMRegisters;
 import util.EventQueue;
+import util.JSONFXLoader;
 
 public class Main extends Application {
 
 	public static void main(String[] args) {
 		SYNCCOM_Loader.init();
 		SYNCCOMRegisters regs = new SYNCCOMRegisters();
-		regs.BGR = 0;
-		regs.CCR0 = 0x00112004;
-		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(regs);
+//		regs.BGR = 0;
+//		regs.CCR0 = 0x00112004;
+//		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(regs);
 		Application.launch(args);
 	}
 
