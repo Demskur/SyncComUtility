@@ -12,32 +12,30 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javax.xml.bind.DatatypeConverter;
 
 import dll.SYNCCOM_Loader;
-import javafx.application.Preloader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import util.AVAILABLE_FUNCTIONS;
+import util.CCR0Keys;
 import util.EventQueue;
 import util.JSONFXLoader;
 import util.Registers;
 
-public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueEvent> {
+public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueEvent>, CCR0Keys {
 	Logger log = Logger.getLogger(this.getClass().getName());
 	boolean viewAsHex = false;
 	boolean viewAsBin = false;
@@ -73,12 +71,6 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 
 	@FXML
 	private Color x22;
-
-	@FXML
-	private ChoiceBox<String> clockList;
-
-	@FXML
-	private TextField clockFrequency;
 
 	@FXML
 	private Button loadPresets;
@@ -136,6 +128,56 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 
 	@FXML
 	private Color x4;
+	// ------------------------------------->CCR0<-----------------------------------//
+	@FXML
+	private ChoiceBox<String> clockList;
+
+	@FXML
+	private TextField clockFrequency;
+
+	@FXML
+	private ChoiceBox<String> transmissionModeList;
+
+	@FXML
+	private ChoiceBox<String> lineEncondingModeList;
+
+	@FXML
+	private ChoiceBox<String> frameSyncModeList;
+
+	@FXML
+	private CheckBox shareFlagMode;
+
+	@FXML
+	private CheckBox interframeTimeFillMode;
+
+	@FXML
+	private ChoiceBox<String> numberOfSyncBytesMode;
+
+	@FXML
+	private ChoiceBox<String> numberOfTerminationBytesMode;
+
+	@FXML
+	private CheckBox maskedInterruptsMode;
+
+	@FXML
+	private ChoiceBox<String> crcFrameCheckModeList;
+
+	@FXML
+	private CheckBox msbMode;
+
+	@FXML
+	private ChoiceBox<String> addressModeList;
+
+	@FXML
+	private CheckBox receiverDisabledMode;
+
+	@FXML
+	private ChoiceBox<String> externalSignalSelectModeList;
+
+	@FXML
+	private Button resetToDefaultButton;
+
+	// -----------------------------------------------------------------
 
 	@FXML
 	void onActionMenuViewASCII(ActionEvent event) {
@@ -183,7 +225,6 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 			data += "\n";
 		if (SYNCCOM_Loader.write(data.getBytes()) > 0)
 			monitorRead.setText(data);
-		;
 		monitorRead.setStyle("-fx-text-inner-color: red;");
 	}
 
@@ -315,50 +356,167 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 
 	@FXML
 	void onAddressModeList(ActionEvent event) {
-		
+		registers.setAddressMode(addressModeList.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
 	void onCRCFrameCheckModeList(ActionEvent event) {
-
+		registers.setCRCFrameCheckMode(crcFrameCheckModeList.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
 	void onExternalSignalSelectModeList(ActionEvent event) {
-
+		registers.setExternalSignalSelectMode(externalSignalSelectModeList.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
 	void onFrameSyncControlModeList(ActionEvent event) {
-
+		registers.setFrameSyncControl(frameSyncModeList.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
 	void onLineEncodingModeList(ActionEvent event) {
-
+		registers.setLineEncondingMode(lineEncondingModeList.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
 	void onNumberOfSyncBytesModeList(ActionEvent event) {
-
+		registers.setNumberOfSyncBytesMode(numberOfSyncBytesMode.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
 	void onNumberOfTerminationBytesModeList(ActionEvent event) {
-
+		registers.setNumberOfTerminationBytesMode(numberOfTerminationBytesMode.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
 	void onTransmissionModeList(ActionEvent event) {
-
+		registers.setTransmissionMode(transmissionModeList.getSelectionModel().getSelectedIndex());
 	}
 
 	@FXML
+	void onShareFlagMode(ActionEvent event) {
+		registers.setShareFlagMode(shareFlagMode.isSelected());
+	}
+
+	@FXML
+	void onResetToDefaultCCR0(ActionEvent event) {
+		setDefaultCCR0();
+	}
+
+	@FXML
+	void onMSBMode(ActionEvent event) {
+		registers.setOrderOfBitTransmissionMode(msbMode.isSelected());
+	}
+
+	@FXML
+	void onMaskedInterruptsVisibleMode(ActionEvent event) {
+		registers.setMaskedInterruptsVisibleMode(maskedInterruptsMode.isSelected());
+	}
+
+	@FXML
+	void onReceiverDisabledMode(ActionEvent event) {
+		registers.setReceiverDisableMode(receiverDisabledMode.isSelected());
+	}
+
+	@FXML
+	void onInterFrameTimeFillMode(ActionEvent event) {
+		registers.setInterFrameTimeFillMode(interframeTimeFillMode.isSelected());
+	}
+
+	@SuppressWarnings("unchecked")
+	@FXML
 	private void initialize() {
-		JSONFXLoader parameterLoader = JSONFXLoader.getInstance();
+		var parameterLoader = JSONFXLoader.getInstance();
 		CCR0 = (Map<?, ?>) parameterLoader.getRegisters().get(AVAILABLE_FUNCTIONS.CCR0.toString());
-		// ((Map<?, ?>) CCR0.get("CLOCK_MODE")).keySet();
-		clockList.getItems().addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get("CLOCK_MODE")).keySet());
+		clockList.getItems().addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CLOCK_MODE)).keySet());
+		transmissionModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(TRANSMISSION_MODE)).keySet());
+		lineEncondingModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(LINE_ENCODING_MODE)).keySet());
+		frameSyncModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(FRAME_SYNC_MODE)).keySet());
+		numberOfSyncBytesMode.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_SYNC_BYTES)).keySet());
+		numberOfTerminationBytesMode.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_TERMINATION_BYTES)).keySet());
+		crcFrameCheckModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CRC_FRAME_CHECK_MODE)).keySet());
+		addressModeList.getItems().addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(ADDRES_MODE)).keySet());
+		externalSignalSelectModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(EXTERNAL_SIGNAL_MODE)).keySet());
+		setDefaults();
+	}
+
+	private void setDefaults() {
+		setDefaultCCR0();
+	}
+
+	private void setDefaultCCR0() {
+		for (Object obj : ((Map<?, ?>) CCR0.get("DEFAULT_BITS")).keySet()) {
+			String key = (String) obj;
+			Object value = ((Map<?, ?>) CCR0.get("DEFAULT_BITS")).get(key);
+			switch (key) {
+			case CLOCK_MODE:
+				clockList.getSelectionModel().select((Integer) value);
+				clockList.fireEvent(new ActionEvent());
+				break;
+			case TRANSMISSION_MODE:
+				transmissionModeList.getSelectionModel().select((Integer) value);
+				transmissionModeList.fireEvent(new ActionEvent());
+				break;
+			case LINE_ENCODING_MODE:
+				lineEncondingModeList.getSelectionModel().select((Integer) value);
+				lineEncondingModeList.fireEvent(new ActionEvent());
+				break;
+			case FRAME_SYNC_MODE:
+				frameSyncModeList.getSelectionModel().select((Integer) value);
+				frameSyncModeList.fireEvent(new ActionEvent());
+				break;
+			case SHARE_FLAG:
+				shareFlagMode.setSelected((Boolean) value);
+				shareFlagMode.fireEvent(new ActionEvent());
+				break;
+			case INTER_FRAME_TIME_FILL:
+				interframeTimeFillMode.setSelected((Boolean) value);
+				interframeTimeFillMode.fireEvent(new ActionEvent());
+				break;
+			case NUMBER_OF_SYNC_BYTES:
+				numberOfSyncBytesMode.getSelectionModel().select((Integer) value);
+				numberOfSyncBytesMode.fireEvent(new ActionEvent());
+				break;
+			case NUMBER_OF_TERMINATION_BYTES:
+				numberOfTerminationBytesMode.getSelectionModel().select((Integer) value);
+				numberOfTerminationBytesMode.fireEvent(new ActionEvent());
+				break;
+			case MASKED_INTERRUPTS_VISIBLE:
+				maskedInterruptsMode.setSelected((Boolean) value);
+				maskedInterruptsMode.fireEvent(new ActionEvent());
+				break;
+			case CRC_FRAME_CHECK_MODE:
+				crcFrameCheckModeList.getSelectionModel().select((Integer) value);
+				crcFrameCheckModeList.fireEvent(new ActionEvent());
+				break;
+			case ORDER_OF_BYTES:
+				msbMode.setSelected((Boolean) value);
+				msbMode.fireEvent(new ActionEvent());
+				break;
+			case ADDRES_MODE:
+				addressModeList.getSelectionModel().select((Integer) value);
+				addressModeList.fireEvent(new ActionEvent());
+				break;
+			case RECEIVER_DISABLED:
+				receiverDisabledMode.setSelected((Boolean) value);
+				receiverDisabledMode.fireEvent(new ActionEvent());
+				break;
+			case EXTERNAL_SIGNAL_MODE:
+				externalSignalSelectModeList.getSelectionModel().select((Integer) value);
+				externalSignalSelectModeList.fireEvent(new ActionEvent());
+				break;
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + key);
+			}
+		}
 	}
 
 }

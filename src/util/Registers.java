@@ -47,6 +47,16 @@ public class Registers extends SYNCCOMRegisters {
 	 * MODE[1:0] – Mode select: <br>
 	 * Enable Transparent operating mode
 	 */
+
+	private void upload() {
+		if (!bitsetRegCCR0.isEmpty()) {
+			setCCR0(bitsetRegCCR0.toLongArray()[0]);
+		} else {
+			setCCR0(0);
+		}
+		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(this);
+	}
+
 	public void setTransmissionMode(int mode) {
 		switch (mode) {
 		case 0: // Enable HDLC operating mode.
@@ -64,8 +74,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
-		setCCR0(bitsetRegCCR0.toLongArray()[0]);
-		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(this);
+		upload();
 	}
 
 	/**
@@ -82,7 +91,7 @@ public class Registers extends SYNCCOMRegisters {
 	 * CM = 111 clock mode 7
 	 * </p>
 	 * 
-	 * @param int mode
+	 * @param int mode 
 	 */
 	public void setClockMode(int mode) {
 		switch (mode) {
@@ -129,8 +138,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
-		setCCR0(bitsetRegCCR0.toLongArray()[0]);
-		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(this);
+		upload();
 	}
 
 	/**
@@ -194,6 +202,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
+		upload();
 	}
 
 	/**
@@ -257,6 +266,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
+		upload();
 	}
 
 	/**
@@ -275,6 +285,7 @@ public class Registers extends SYNCCOMRegisters {
 		else
 			// Enable shared flags
 			bitsetRegCCR0.set(11, false);
+		upload();
 	}
 
 	/**
@@ -292,6 +303,7 @@ public class Registers extends SYNCCOMRegisters {
 		else
 			// Continuous SYNC sequences are sent during idle periods
 			bitsetRegCCR0.set(12, false);
+		upload();
 	}
 
 	/**
@@ -339,6 +351,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
+		upload();
 	}
 
 	/**
@@ -387,6 +400,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
+		upload();
 	}
 
 	/**
@@ -410,6 +424,7 @@ public class Registers extends SYNCCOMRegisters {
 			// Default. Masked interrupt status bits are not visible on interrupt status
 			// register (ISR) read accesses.
 			bitsetRegCCR0.set(19, false);
+		upload();
 	}
 
 	/**
@@ -445,6 +460,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
+		upload();
 	}
 
 	/**
@@ -462,6 +478,7 @@ public class Registers extends SYNCCOMRegisters {
 		else
 			// LSB First
 			bitsetRegCCR0.set(22, false);
+		upload();
 	}
 
 	/**
@@ -498,6 +515,7 @@ public class Registers extends SYNCCOMRegisters {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
+		upload();
 	}
 
 	/**
@@ -516,6 +534,7 @@ public class Registers extends SYNCCOMRegisters {
 		else
 			// Receiver disabled.
 			bitsetRegCCR0.set(25, false);
+		upload();
 	}
 
 	/**
@@ -532,25 +551,30 @@ public class Registers extends SYNCCOMRegisters {
 	 */
 	public void setExternalSignalSelectMode(int mode) {
 		switch (mode) {
-		case 0: // No address checking.
-			bitsetRegCCR0.set(23, false);
-			bitsetRegCCR0.set(24, false);
+		case 0: // CTS selected
+			bitsetRegCCR0.set(28, false);
+			bitsetRegCCR0.set(29, false);
 			break;
-		case 1: // 1 byte address checking.
-			bitsetRegCCR0.set(23);
-			bitsetRegCCR0.set(24, false);
+		case 1: // DSR selected
+			bitsetRegCCR0.set(28);
+			bitsetRegCCR0.set(29, false);
 			break;
-		case 2: // 2 byte address checking.
-			bitsetRegCCR0.set(23, false);
-			bitsetRegCCR0.set(24);
+		case 2: // RI selected
+			bitsetRegCCR0.set(28, false);
+			bitsetRegCCR0.set(29);
 			break;
-		case 3: // Reserved
-			bitsetRegCCR0.set(23);
-			bitsetRegCCR0.set(24);
+		case 3: // CD selected
+			bitsetRegCCR0.set(28);
+			bitsetRegCCR0.set(29);
 			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + mode);
 		}
+		upload();
+	}
+
+	public void setPrimitiveAllBitsCCR0() {
+
 	}
 
 }

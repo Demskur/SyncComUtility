@@ -20,8 +20,8 @@ public class Main extends Application {
 		SYNCCOM_Loader.init();
 		SYNCCOMRegisters regs = new SYNCCOMRegisters();
 //		regs.BGR = 0;
-//		regs.CCR0 = 0x00112004;
-//		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(regs);
+		regs.CCR0 = 0x00112004;
+		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(regs);
 		Application.launch(args);
 	}
 
