@@ -1,7 +1,9 @@
 package main;
 
-import controlador.ControllerFx;
-import dll.SYNCCOM_Loader;
+import main.java.controlador.ControllerFx;
+
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -10,9 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import synccom.SYNCCOMRegisters;
-import util.EventQueue;
-import util.JSONFXLoader;
+import main.java.synccom.SYNCCOM_Loader;
+import main.java.util.SerialThread;
+import main.java.synccom.SYNCCOMRegisters;
+import main.java.util.EventQueue;
 
 public class Main extends Application {
 
@@ -27,13 +30,13 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fx/principal.fxml"));
+		FXMLLoader loader = new FXMLLoader(new File("src/main/resources/fx/principal.fxml").toURI().toURL());
 		Parent rootPane = loader.load();
 		primaryStage.setScene(new Scene(rootPane));
 		primaryStage.show();
 		ControllerFx controller = (ControllerFx) loader.getController();
 		EventQueue<ControllerFx.QueueEvent> equeue = new EventQueue<ControllerFx.QueueEvent>(controller);
-		SerialThread serialThread = new SerialThread(null, 100, equeue);
+		var serialThread = new SerialThread(null, 100, equeue);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent e) {

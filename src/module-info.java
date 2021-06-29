@@ -17,8 +17,8 @@ module fastcom_test {
 	requires com.fasterxml.jackson.databind;
 
 	exports main to javafx.fxml, javafx.graphics;
-	exports controlador to javafx.fxml, javafx.graphics;
+	exports main.java.controlador to javafx.fxml, javafx.graphics;
 
-	opens util;
-	opens controlador;
+	opens main.java.util;
+	opens main.java.controlador;
 }
