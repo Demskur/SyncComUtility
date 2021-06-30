@@ -549,7 +549,6 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 				externalSignalSelectModeList.getSelectionModel().select((Integer) value);
 				externalSignalSelectModeList.fireEvent(new ActionEvent());
 				break;
-			// ---------------> No requieren un fireEvent <-----------
 			case HMI_ENABLE_CR:
 				checkCR.setSelected((Boolean) value);
 				checkCR.fireEvent(new ActionEvent());
