@@ -1,17 +1,12 @@
 package main.java.util;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import main.java.synccom.SYNCCOM_Loader;
 
 public class JSONFXLoader {
 	Map<?, ?> registers;

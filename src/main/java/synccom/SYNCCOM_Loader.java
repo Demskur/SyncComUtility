@@ -4,7 +4,6 @@
 package main.java.synccom;
 
 import java.io.File;
-import java.io.File;
 import java.util.ArrayList;
 
 /**
