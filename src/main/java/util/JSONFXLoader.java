@@ -2,11 +2,14 @@ package main.java.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import main.java.synccom.SYNCCOM_Loader;
 
 public class JSONFXLoader {
 	Map<?, ?> registers;
@@ -26,9 +29,9 @@ public class JSONFXLoader {
 			// create object mapper instance
 			mapper = new ObjectMapper();
 			// convert JSON file to map
-			Map<?, ?> map = mapper.readValue(new File("src/main/resources/config/config.json"), Map.class);
+			Map<?, ?> map = mapper.readValue(getClass().getResource("/config/config.json"), Map.class);
 			registers = (Map<?, ?>) map.get("REGISTERS");
-			history = mapper.readValue(new File("src/main/resources/config/history.json"), Map.class);
+			history = mapper.readValue(getClass().getResource("/config/history.json"), Map.class);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -42,9 +45,21 @@ public class JSONFXLoader {
 		return history;
 	}
 
+	public static String getFolderPath() {
+		String pathName = null;
+		try {
+			pathName = JSONFXLoader.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pathName.substring(0, pathName.lastIndexOf("/"));
+	}
+
 	public void setHistory(Map<String, Object> map) {
 		try {
-			mapper.writeValue(new File("src/main/resources/config/history.json"), map);
+			//FIXME Arreglar poder escribir json dentro del jar, solo eso falta 
+			mapper.writeValue(new File("/config/history.json"), map);
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

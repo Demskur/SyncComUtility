@@ -30,7 +30,7 @@ public class App extends Application {
 //		regs.CCR0 = 0x00112004;
 //		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(regs);
 
-		FXMLLoader loader = new FXMLLoader(App.class.getResource("/main/resources/fx/principal.fxml"));// new
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fx/principal.fxml"));// new
 																										// File("src/main/resources/fx/principal.fxml").toURI().toURL());
 		Parent rootPane = loader.load();
 		primaryStage.setScene(new Scene(rootPane));
