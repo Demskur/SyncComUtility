@@ -65,6 +65,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
+							<overwrite>true</overwrite>
 							<outputDirectory>${project.build.directory}/dll</outputDirectory>
 							<resources>
 								<resource>
@@ -73,7 +74,40 @@
 								</resource>
 							</resources>
 						</configuration>
-
+					</execution>
+					<execution>
+						<id>copy-resources-1</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<outputDirectory>${project.build.directory}/config</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/config</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resources-2</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<outputDirectory>${project.build.directory}/fix</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/jarfix</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

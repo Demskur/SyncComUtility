@@ -1,10 +1,5 @@
 package main.java.fx;
 
-import main.java.controlador.ControllerFx;
-
-import java.io.File;
-import java.io.InputStream;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -15,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import main.java.synccom.SYNCCOM_Loader;
 import main.java.util.SerialThread;
+import main.java.fx.controlador.ControllerFx;
 import main.java.synccom.SYNCCOMRegisters;
 import main.java.util.EventQueue;
 import main.java.util.JSONFXLoader;

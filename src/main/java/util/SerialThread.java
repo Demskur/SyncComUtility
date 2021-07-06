@@ -7,9 +7,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
-import main.java.controlador.ControllerFx;
-import main.java.controlador.ControllerFx.QueueEvent;
-import main.java.controlador.ControllerFx.QueueEvent.QueueEventType;
+import main.java.fx.controlador.ControllerFx;
+import main.java.fx.controlador.ControllerFx.QueueEvent;
+import main.java.fx.controlador.ControllerFx.QueueEvent.QueueEventType;
 import main.java.synccom.SYNCCOM_Loader;
 
 /**

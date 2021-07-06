@@ -2,7 +2,7 @@
  * Sample Skeleton for 'principal.fxml' Controller Class
  */
 
-package main.java.controlador;
+package main.java.fx.controlador;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
