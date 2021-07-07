@@ -4,8 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fastcom_test</groupId>
 	<artifactId>fastcom_test</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>fastcom_maven</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 	<build>
 		<finalName>Synccom-Monitor</finalName>
 		<sourceDirectory>src</sourceDirectory>
@@ -57,6 +61,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
 				<executions>
 					<execution>
 						<id>copy-resources</id>
