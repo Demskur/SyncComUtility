@@ -32,6 +32,7 @@ public class App extends Application {
 		primaryStage.setScene(new Scene(rootPane));
 		primaryStage.show();
 		ControllerFx controller = (ControllerFx) loader.getController();
+		controller.setStage(primaryStage);
 		EventQueue<ControllerFx.QueueEvent> equeue = new EventQueue<ControllerFx.QueueEvent>(controller);
 		var serialThread = new SerialThread(null, 100, equeue);
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
