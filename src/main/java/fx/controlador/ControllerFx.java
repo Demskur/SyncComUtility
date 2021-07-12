@@ -7,6 +7,11 @@ package main.java.fx.controlador;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -15,9 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-
 import javax.xml.bind.DatatypeConverter;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,12 +32,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import main.java.synccom.SYNCCOM_Loader;
 import main.java.util.AVAILABLE_FUNCTIONS;
-import main.java.util.SYNCCOMKeys;
 import main.java.util.EventQueue;
 import main.java.util.JSONFXLoader;
 import main.java.util.Registers;
+import main.java.util.SYNCCOMKeys;
 
 public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueEvent>, SYNCCOMKeys {
 	Logger log = Logger.getLogger(this.getClass().getName());
@@ -62,6 +67,9 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 			this.description = description;
 		}
 	}
+
+	@FXML
+	private MenuItem menuSaveMonitor;
 
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
@@ -181,6 +189,41 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	private Button resetToDefaultButton;
 
 	// -----------------------------------------------------------------
+	Stage primaryStage;
+	ByteArrayOutputStream rxBuffer = new ByteArrayOutputStream();
+
+	@SuppressWarnings("exports")
+	public void setStage(Stage stage) {
+		this.primaryStage = stage;
+	}
+
+	@FXML
+	void onActionMenuSaveMonitor(ActionEvent event) {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de texto plano", "*.txt"));
+		File saveFile = fileChooser.showSaveDialog(primaryStage);
+		if (saveFile != null) {
+			try {
+				// alternativa String
+//				PrintWriter writer = new PrintWriter(saveFile);
+//				writer.print(checkTypeView(rxBuffer.toByteArray()));
+//				writer.close();
+				FileOutputStream fout = new FileOutputStream(saveFile);
+				fout.write(rxBuffer.toByteArray());
+				fout.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
 
 	@FXML
 	void onActionMenuViewASCII(ActionEvent event) {
@@ -315,12 +358,12 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	private String checkTypeView(byte[] data) throws UnsupportedEncodingException {
 		if (viewAsHex) {
 			monitorRead.setStyle("-fx-text-inner-color: blue;");
-			return "0x" + DatatypeConverter.printHexBinary(data);
+			return DatatypeConverter.printHexBinary(data);
 		} else if (viewAsASCII) {
 			BigInteger decimal;
 			if (data.length > 0) {
 				decimal = new BigInteger(data);
-				return "d" + decimal.toString();// new String(data, "ISO-8859-1");
+				return decimal.toString();// new String(data, "ISO-8859-1");
 			} else
 				return "";
 		} else if (viewAsText)
@@ -339,14 +382,16 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	public void process(QueueEvent event) {
 		switch (event.type) {
 		case READ:
-			String data = null;
 			try {
 				// Concatena el String que se esta mostrando en el monitor con el nuevo String,
 				// dependiendo de la View seleccionada
-				data = monitorRead.getText() + checkTypeView(event.data);
-				monitorRead.setText(data);
+				rxBuffer.write(event.data);
+				monitorRead.appendText(checkTypeView(event.data));
 			} catch (UnsupportedEncodingException e) {
 				log.warning("Error al transformar el byte en view" + e.getMessage());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			break;
 		case WRITE:

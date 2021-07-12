@@ -49,7 +49,9 @@ public class Registers extends SYNCCOMRegisters {
 	 */
 
 	private void upload() {
+
 		if (!bitsetRegCCR0.isEmpty()) {
+			var a = bitsetRegCCR0.toLongArray()[0];
 			setCCR0(bitsetRegCCR0.toLongArray()[0]);
 		} else {
 			setCCR0(0);
@@ -91,7 +93,7 @@ public class Registers extends SYNCCOMRegisters {
 	 * CM = 111 clock mode 7
 	 * </p>
 	 * 
-	 * @param int mode 
+	 * @param int mode
 	 */
 	public void setClockMode(int mode) {
 		switch (mode) {
@@ -572,9 +574,4 @@ public class Registers extends SYNCCOMRegisters {
 		}
 		upload();
 	}
-
-	public void setPrimitiveAllBitsCCR0() {
-
-	}
-
 }
