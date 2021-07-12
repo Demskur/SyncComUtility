@@ -18,7 +18,7 @@ public class Registers extends SYNCCOMRegisters {
 	BitSet bitsetRegCCR1 = new BitSet(32);
 
 	/**
-	 * MODE[1:0] – Mode select: <br/>
+	 * MODE[1:0]  Mode select: <br/>
 	 * Default. Enable HDLC operating mode.
 	 * <p>
 	 * HDLC operating mode will set some configuration information that is mandated
@@ -42,9 +42,9 @@ public class Registers extends SYNCCOMRegisters {
 	 * o CRC = CCITT CCR0:CRC[1:0] = 01<br />
 	 * o CRC Reset = 0xFFFF CCR1:CRCR = 0
 	 * </p>
-	 * MODE[1:0] – Mode select: <br>
+	 * MODE[1:0] Mode select: <br>
 	 * Enable X-Sync operating mode <br>
-	 * MODE[1:0] – Mode select: <br>
+	 * MODE[1:0] Mode select: <br>
 	 * Enable Transparent operating mode
 	 */
 
@@ -270,7 +270,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * SFLAG – :Shared Flag Mode.<br>
+	 * SFLAG  :Shared Flag Mode.<br>
 	 * This bit enables shared flag transmission and reception in HDLC and X-Sync
 	 * protocol modes. If more than one transmit frame start is stored in the
 	 * transmit FIFO, the closing flag of the preceding frame becomes the opening
@@ -289,16 +289,16 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * ITF – Inter-frame Time Fill.<br>
+	 * ITF  Inter-frame Time Fill.<br>
 	 * This bit selects the idle state of the transmit data pin. if true, Continuous
-	 * logical ‘1’ is sent during idle periods, else, Continuous SYNC sequences are
+	 * logical ï¿½1ï¿½ is sent during idle periods, else, Continuous SYNC sequences are
 	 * sent during idle periods
 	 * 
 	 * @param enable
 	 */
 	public void setInterFrameTimeFillMode(boolean enable) {
 		if (enable)
-			// Continuous logical ‘1’ is sent during idle periods
+			// Continuous logical ï¿½1ï¿½ is sent during idle periods
 			bitsetRegCCR0.set(12);
 		else
 			// Continuous SYNC sequences are sent during idle periods
@@ -307,7 +307,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * NSB[2:0] – Number of Sync Bytes.<br>
+	 * NSB[2:0] Number of Sync Bytes.<br>
 	 * This bit field selects the number of sync bytes to use when synchronizing to
 	 * data.
 	 * <p>
@@ -355,7 +355,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * NTB[2:0] – Number of Termination Bytes.<br>
+	 * NTB[2:0]  Number of Termination Bytes.<br>
 	 * This bit field selects the number of terminating bytes to use when detecting
 	 * frame end.
 	 * <p>
@@ -404,7 +404,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * VIS – Masked Interrupts Visible.<br>
+	 * VIS Masked Interrupts Visible.<br>
 	 * if <b>true</b>, Masked interrupt status bits are visible and automatically
 	 * cleared on interrupt status register (ISR) read accesses. These interrupts
 	 * will not generate an interrupt to the interrupt controller, they will only be
@@ -428,7 +428,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * CRC[1:0] – CRC Frame Check Mode.<br>
+	 * CRC[1:0]  CRC Frame Check Mode.<br>
 	 * This bit field selects the algorithm used in calculating CRC.
 	 * <p>
 	 * CRC = 00 Use CRC-8 algorithm.<br />
@@ -464,7 +464,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * OBT – Order of Bit Transmission.<br/>
+	 * OBT Order of Bit Transmission.<br/>
 	 * Specifies whether data is considered least significant bit (LSB) first or
 	 * most significant bit (MSB) first.<br/>
 	 * if TRUE, enable MSB First, else, enable LSB First.
@@ -482,7 +482,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * ADM[1:0] – Address Mode (HDLC only).<br/>
+	 * ADM[1:0] Address Mode (HDLC only).<br/>
 	 * This bit field selects the number of bytes used in receive address
 	 * comparison.*
 	 * <p>
@@ -519,7 +519,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * RECD – Receiver Disable.<br/>
+	 * RECD Receiver Disable.<br/>
 	 * When set, this bit disables the receiver. This can be useful, for example,
 	 * when in Transparent mode and transmitting only. You would not want to receive
 	 * an endless stream of idles which do nothing but generate unnecessary
@@ -538,7 +538,7 @@ public class Registers extends SYNCCOMRegisters {
 	}
 
 	/**
-	 * EXTS[1:0] – External Signal Select.<br/>
+	 * EXTS[1:0] External Signal Select.<br/>
 	 * These bits select the external input source pin for the TXEXT command.
 	 * <p>
 	 * EXTS = 00 CTS selected<br />
