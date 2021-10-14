@@ -1,0 +1,1 @@
+Utilitario hecho en Java/Java Fx para el modulo Fastcom-SyncCom.
