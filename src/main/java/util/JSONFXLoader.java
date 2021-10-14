@@ -11,10 +11,12 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javafx.util.Pair;
 import main.java.synccom.SYNCCOM_Loader;
 
 public class JSONFXLoader {
-	Map<?, ?> registers;
+	Pair<Map<?, ?>, Map<?, ?>> reg;
+
 	Map<?, ?> history;
 	Logger log = Logger.getLogger(this.getClass().getName());
 	ObjectMapper mapper = new ObjectMapper();
@@ -33,17 +35,25 @@ public class JSONFXLoader {
 			mapper = new ObjectMapper();
 			// convert JSON file to map
 			Map<?, ?> map = mapper.readValue(new File(getFolderPath("/config/config.json")), Map.class);
-			registers = (Map<?, ?>) map.get("REGISTERS");
+			reg = new Pair((Map<?, ?>) map.get("REGISTERS"),(Map<?, ?>) map.get("TIPS"));
 			history = mapper.readValue(new File(getFolderPath("/config/history.json")), Map.class);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	public Map<?, ?> getRegisters() {
-		return registers;
+	protected Pair<Map<?, ?>, Map<?, ?>> getRegisters() {
+		return this.reg;
 	}
-
+	
+	public Map<?, ?> getRegister(AVAILABLE_REGS reg) {
+		return (Map<?, ?>) getRegisters().getKey().get(reg.toString());
+	}
+	
+	public Map<?, ?> getTips(AVAILABLE_OPTIONS option) {
+		return (Map<?, ?>) getRegisters().getValue().get(option.toString());
+	}
+	
 	public Map<?, ?> getHistory() {
 		return history;
 	}
