@@ -620,7 +620,7 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 				break;
 			case CLOCK_FREQUENCY:
 				clockFrequency.setText(Integer.toString((Integer) value));
-				clockFrequency.fireEvent(new ActionEvent());
+				loadPresets.fireEvent(new ActionEvent());
 				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + key);

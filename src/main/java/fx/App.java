@@ -25,7 +25,7 @@ public class App extends Application {
 //		regs.BGR = 0;
 //		regs.CCR0 = 0x00112004;
 //		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(regs);
-
+//		SYNCCOM_Loader.setClockFrequency(19132000);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fx/principal.fxml"));// new
 																										// File("src/main/resources/fx/principal.fxml").toURI().toURL());
 		Parent rootPane = loader.load();
