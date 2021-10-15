@@ -41,6 +41,7 @@ import main.java.synccom.SYNCCOM_Loader;
 import main.java.util.AVAILABLE_REGS;
 import main.java.util.EventQueue;
 import main.java.util.JSONFXLoader;
+import main.java.util.Register;
 import main.java.util.Registers;
 import main.java.util.SYNCCOMKeys;
 
@@ -51,7 +52,7 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	boolean viewAsASCII = false;
 	boolean viewAsText = true;
 	Registers registers = new Registers();
-	Map<?, ?> CCR0;
+	Register CCR0;
 	Map<String, Object> actionHistory = new LinkedHashMap<>();
 	JSONFXLoader parameterLoader = JSONFXLoader.getInstance();
 
@@ -87,7 +88,7 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	private Color x22;
 
 	@FXML
-	private ComboBox<?> clockList;
+	private ComboBox<String> clockList;
 
 	@FXML
 	private TextField clockFrequency;
@@ -96,13 +97,13 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	private Button loadPresets;
 
 	@FXML
-	private ComboBox<?> transmissionModeList;
+	private ComboBox<String> transmissionModeList;
 
 	@FXML
-	private ComboBox<?> lineEncondingModeList;
+	private ComboBox<String> lineEncondingModeList;
 
 	@FXML
-	private ComboBox<?> frameSyncModeList;
+	private ComboBox<String> frameSyncModeList;
 
 	@FXML
 	private CheckBox shareFlagMode;
@@ -111,28 +112,28 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	private CheckBox interframeTimeFillMode;
 
 	@FXML
-	private ComboBox<?> numberOfSyncBytesMode;
+	private ComboBox<String> numberOfSyncBytesMode;
 
 	@FXML
-	private ComboBox<?> numberOfTerminationBytesMode;
+	private ComboBox<String> numberOfTerminationBytesMode;
 
 	@FXML
 	private CheckBox maskedInterruptsMode;
 
 	@FXML
-	private ComboBox<?> crcFrameCheckModeList;
+	private ComboBox<String> crcFrameCheckModeList;
 
 	@FXML
 	private CheckBox msbMode;
 
 	@FXML
-	private ComboBox<?> addressModeList;
+	private ComboBox<String> addressModeList;
 
 	@FXML
 	private CheckBox receiverDisabledMode;
 
 	@FXML
-	private ComboBox<?> externalSignalSelectModeList;
+	private ComboBox<String> externalSignalSelectModeList;
 
 	@FXML
 	private Button resetToDefaultButton;
@@ -511,25 +512,24 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	@FXML
 	private void initialize() {
 		CCR0 = parameterLoader.getRegister(AVAILABLE_REGS.CCR0);
-		var  texto = CCR0.get(CLOCK_MODE).keySet();
-//		FXCollections.observableArrayList(((Map<?, ?>) CCR0.get(CLOCK_MODE)).keySet());
-//		clockList.getItems().addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CLOCK_MODE)).keySet());
-//		parameterLoader.getTips(AVAILABLE_OPTIONS.CLOCK_MODE);
-//		transmissionModeList.getItems()
-//				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(TRANSMISSION_MODE)).keySet());
-//		lineEncondingModeList.getItems()
-//				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(LINE_ENCODING_MODE)).keySet());
-//		frameSyncModeList.getItems()
-//				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(FRAME_SYNC_MODE)).keySet());
-//		numberOfSyncBytesMode.getItems()
-//				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_SYNC_BYTES)).keySet());
-//		numberOfTerminationBytesMode.getItems()
-//				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_TERMINATION_BYTES)).keySet());
-//		crcFrameCheckModeList.getItems()
-//				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CRC_FRAME_CHECK_MODE)).keySet());
-//		addressModeList.getItems().addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(ADDRES_MODE)).keySet());
-//		externalSignalSelectModeList.getItems()
-//				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(EXTERNAL_SIGNAL_MODE)).keySet());
+		clockList.getItems().setAll(CCR0.getOptionAsArray(CLOCK_MODE));
+		
+		clockList.getItems().setAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CLOCK_MODE)).keySet());
+		transmissionModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(TRANSMISSION_MODE)).keySet());
+		lineEncondingModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(LINE_ENCODING_MODE)).keySet());
+		frameSyncModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(FRAME_SYNC_MODE)).keySet());
+		numberOfSyncBytesMode.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_SYNC_BYTES)).keySet());
+		numberOfTerminationBytesMode.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_TERMINATION_BYTES)).keySet());
+		crcFrameCheckModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CRC_FRAME_CHECK_MODE)).keySet());
+		addressModeList.getItems().addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(ADDRES_MODE)).keySet());
+		externalSignalSelectModeList.getItems()
+				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(EXTERNAL_SIGNAL_MODE)).keySet());
 		setAllControlls(parameterLoader.getHistory());
 	}
 

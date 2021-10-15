@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -46,8 +48,8 @@ public class JSONFXLoader {
 		return this.reg;
 	}
 	
-	public Map<?, ?> getRegister(AVAILABLE_REGS reg) {
-		return (Map<?, ?>) getRegisters().getKey().get(reg.toString());
+	public Register getRegister(AVAILABLE_REGS reg) {
+		return new RegisterImpl(reg);
 	}
 	
 	public Map<?, ?> getTips(AVAILABLE_OPTIONS option) {
@@ -96,6 +98,25 @@ public class JSONFXLoader {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	protected class RegisterImpl implements Register{
+		Map<?,?> register;
+		Map<?,?> option;
+		
+		public RegisterImpl(AVAILABLE_REGS reg) {
+			this.register=  (Map<?, ?>) getRegisters().getKey().get(reg.toString());
+		}
+		
+		@Override
+		public ArrayList<String> getOptionAsArray(String option) {
+			this.option= (Map<?, ?>) this.register.get(option);
+			return new ArrayList<String>(Arrays.asList(this.option.keySet().toArray(new String[this.register.size()])));
+		}
+		
+		public Map<?,?> getRegisterHasMap(){
+			return this.register;
 		}
 	}
 }
