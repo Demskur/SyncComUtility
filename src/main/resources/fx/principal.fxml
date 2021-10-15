@@ -124,7 +124,7 @@
                                                 <VBox maxWidth="-Infinity" prefHeight="359.0" prefWidth="174.0">
                                                    <children>
                                                       <Label text="Clock Mode" />
-                                                      <ComboBox fx:id="clockList" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="clockList" maxWidth="1.7976931348623157E308" onAction="#onClockModeList" prefHeight="25.0" prefWidth="195.0" />
                                                       <Label prefHeight="17.0" prefWidth="213.0" text="Clock Frequency 1MHz - 50MHz [Hz]" />
                                                       <TextField fx:id="clockFrequency" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="173.0" />
                                                       <Button fx:id="loadPresets" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSetClockFrequencyButton" prefHeight="22.0" prefWidth="196.0" text="Configurar">
@@ -140,11 +140,11 @@
                                                 <VBox prefHeight="103.0" prefWidth="199.0">
                                                    <children>
                                                       <Label text="Transmission Mode" />
-                                                      <ComboBox fx:id="transmissionModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="transmissionModeList" maxHeight="1.7976931348623157E308" onAction="#onTransmissionModeList" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
                                                       <Label text="Line Enconding Mode" />
-                                                      <ComboBox fx:id="lineEncondingModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="lineEncondingModeList" maxHeight="1.7976931348623157E308" onAction="#onLineEncodingModeList" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
                                                       <Label text="FrameSync Control Mode" />
-                                                      <ComboBox fx:id="frameSyncModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="frameSyncModeList" maxHeight="1.7976931348623157E308" onAction="#onFrameSyncControlModeList" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
                                                       <Separator prefWidth="200.0">
                                                          <VBox.margin>
                                                             <Insets bottom="5.0" top="10.0" />
@@ -162,9 +162,9 @@
                                                          </VBox.margin>
                                                       </Separator>
                                                       <Label text="Number of Sync Bytes" />
-                                                      <ComboBox fx:id="numberOfSyncBytesMode" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="numberOfSyncBytesMode" maxHeight="1.7976931348623157E308" onAction="#onNumberOfSyncBytesModeList" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
                                                       <Label text="Number of Termination Bytes" />
-                                                      <ComboBox fx:id="numberOfTerminationBytesMode" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="numberOfTerminationBytesMode" maxHeight="1.7976931348623157E308" onAction="#onNumberOfTerminationBytesModeList" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
                                                       <Separator prefWidth="200.0">
                                                          <VBox.margin>
                                                             <Insets bottom="5.0" top="10.0" />
@@ -177,7 +177,7 @@
                                                          </VBox.margin>
                                                       </Separator>
                                                       <Label text="CRC Frame Check Mode" />
-                                                      <ComboBox fx:id="crcFrameCheckModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="crcFrameCheckModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onCRCFrameCheckModeList" prefHeight="25.0" prefWidth="195.0" />
                                                       <Separator prefWidth="200.0">
                                                          <VBox.margin>
                                                             <Insets bottom="5.0" top="10.0" />
@@ -190,7 +190,7 @@
                                                          </VBox.margin>
                                                       </Separator>
                                                       <Label text="Address Mode" />
-                                                      <ComboBox fx:id="addressModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="addressModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAddressModeList" prefHeight="25.0" prefWidth="195.0" />
                                                       <Separator prefWidth="200.0">
                                                          <VBox.margin>
                                                             <Insets bottom="5.0" top="10.0" />
@@ -203,7 +203,7 @@
                                                          </VBox.margin>
                                                       </Separator>
                                                       <Label text="External Signal Select" />
-                                                      <ComboBox fx:id="externalSignalSelectModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="195.0" />
+                                                      <ComboBox fx:id="externalSignalSelectModeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onExternalSignalSelectModeList" prefHeight="25.0" prefWidth="195.0" />
                                                       <Button fx:id="resetToDefaultButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onResetToDefaultCCR0" text="Reset to Default" />
                                                    </children>
                                                 </VBox>
