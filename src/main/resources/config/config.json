@@ -1,125 +1,152 @@
 {
 	"REGISTERS": {
 		"CCR0": {
-			"CLOCK_MODE": {
-				"CLOCK_MODE_0": 0,
-				"CLOCK_MODE_1": 1,
-				"CLOCK_MODE_2": 2,
-				"CLOCK_MODE_3": 3,
-				"CLOCK_MODE_4": 4,
-				"CLOCK_MODE_5": 5,
-				"CLOCK_MODE_6": 6,
-				"CLOCK_MODE_7": 7
+			"clockList": {
+				"OPTIONS": {
+					"CLOCK_MODE_0": 0,
+					"CLOCK_MODE_1": 1,
+					"CLOCK_MODE_2": 2,
+					"CLOCK_MODE_3": 3,
+					"CLOCK_MODE_4": 4,
+					"CLOCK_MODE_5": 5,
+					"CLOCK_MODE_6": 6,
+					"CLOCK_MODE_7": 7
+				},
+				"TIPS": {
+					"CLOCK_MODE_0": "Recepcion: RxClk, Transmision: TxClk ",
+					"CLOCK_MODE_1": "Recepcion: RxClk  , Transmision: BGR Interno",
+					"CLOCK_MODE_2": "Recepcion: RxClk, Transmision: RxClk",
+					"CLOCK_MODE_3": "Recepcion: DPLL + BGR, Transmision: TxClk",
+					"CLOCK_MODE_4": "Recepcion: DPLL + BGR, Transmision: BGR Interno / 16",
+					"CLOCK_MODE_5": "Recepcion: DPLL + BGR, Transmision: DPLL + BGR",
+					"CLOCK_MODE_6": "Recepcion: BGR Interno, Transmision: TxClk",
+					"CLOCK_MODE_7": "Recepcion: BGR Interno, Transmision: BGR Interno. \r\n Advertencia: Solo habilitar este modo con la recepcion desactivada"
+				}
 			},
-			"TRANSMISSION_MODE": {
-				"ENABLE_HDLC": 0,
-				"ENABLE_X_SYNC": 0,
-				"ENABLE_TRANSPARENT": 0
+			"transmissionModeList": {
+				"OPTIONS": {
+					"ENABLE_HDLC": 0,
+					"ENABLE_X_SYNC": 0,
+					"ENABLE_TRANSPARENT": 0
+				},
+				"TIPS": {
+					"ENABLE_HDCL": "Protocolo HDCL",
+					"ENABLE_X_SYNC": "Protocolo X_SYNC propietario de Fastcomm",
+					"ENABLE_TRANSPARENT": "Sin protocolo, control por señales Frame Sync"
+				}
 			},
-			"LINE_ENCODING_MODE": {
-				"NRZ": 0,
-				"NRZI": 1,
-				"FM0": 2,
-				"FM1": 3,
-				"MANCHESTER": 4,
-				"DIFFERENTIAL": 5
+			"lineEncondingModeList": {
+				"OPTIONS": {
+					"NRZ": 0,
+					"NRZI": 1,
+					"FM0": 2,
+					"FM1": 3,
+					"MANCHESTER": 4,
+					"DIFFERENTIAL": 5
+				}
 			},
-			"FRAME_SYNC_MODE": {
-				"NO_FSYNC": 0,
-				"MODE_1": 1,
-				"MODE_2": 2,
-				"MODE_3": 3,
-				"MODE_2&3": 4,
-				"MODE_5": 5
+			"frameSyncModeList": {
+				"OPTIONS": {
+					"NO_FSYNC": 0,
+					"MODE_1": 1,
+					"MODE_2": 2,
+					"MODE_3": 3,
+					"MODE_2&3": 4,
+					"MODE_5": 5
+				},
+				"TIPS": {
+					"NO_FSYNC": "0",
+					"MODE_1": "La señal de sincronización enmarca completamente los datos",
+					"MODE_2": "La señal de sincronización se encuentra al comienzo de los datos",
+					"MODE_3": "La señal de sincronización se encuentra al final de los datos",
+					"MODE_2&3": "",
+					"MODE_5": "similar al modo 1, excepto que hay independientes controles para el borde anterior y posterior de la señal FST"
+				}
 			},
-			"SHARE_FLAG": {
+			"shareFlagMode": {
 				"Share Flag": false
 			},
-			"INTER_FRAME_TIME_FILL": {
+			"interframeTimeFillMode": {
 				"Inter-Frame Time Fill": false
 			},
-			"NUMBER_OF_SYNC_BYTES": {
-				"NO_SYNC": 0,
-				"ONE_BYTE": 1,
-				"TWO_BYTES": 2,
-				"THREE_BYTES": 3,
-				"FOUR_BYTES": 4
+			"numberOfSyncBytesMode": {
+				"OPTIONS": {
+					"NO_SYNC": 0,
+					"ONE_BYTE": 1,
+					"TWO_BYTES": 2,
+					"THREE_BYTES": 3,
+					"FOUR_BYTES": 4
+				}
 			},
-			"NUMBER_OF_TERMINATION_BYTES": {
-				"NO_TERMINATION": 0,
-				"ONE_BYTE": 1,
-				"TWO_BYTES": 2,
-				"THREE_BYTES": 3,
-				"FOUR_BYTES": 4
+			"numberOfTerminationBytesMode": {
+				"OPTIONS": {
+					"NO_TERMINATION": 0,
+					"ONE_BYTE": 1,
+					"TWO_BYTES": 2,
+					"THREE_BYTES": 3,
+					"FOUR_BYTES": 4
+				}
 			},
-			"MASKED_INTERRUPTS_VISIBLE": {
+			"maskedInterruptsMode": {
 				"Masked Interrupts Visible": false
 			},
-			"CRC_FRAME_CHECK_MODE": {
-				"CRC-8": 0,
-				"CRC-CCITT": 1,
-				"CRC-16": 2,
-				"CRC-32": 3
+			"crcFrameCheckModeList": {
+				"OPTIONS": {
+					"CRC-8": 0,
+					"CRC-CCITT": 1,
+					"CRC-16": 2,
+					"CRC-32": 3
+				}
 			},
-			"ORDER_OF_BYTES": {
+			"msbMode": {
 				"MSB (on) / LSB (off)": false
 			},
-			"ADDRES_MODE": {
-				"NO_ADDRESS": 0,
-				"1_BYTE": 1,
-				"2_BYTES": 2
+			"addressModeList": {
+				"OPTIONS": {
+					"NO_ADDRESS": 0,
+					"1_BYTE": 1,
+					"2_BYTES": 2
+				}
 			},
-			"RECEIVER_DISABLED": {
+			"receiverDisabledMode": {
 				"Receiver Disable": false
 			},
-			"EXTERNAL_SIGNAL_MODE": {
-				"CTS": 0,
-				"DSR": 1,
-				"RI": 2,
-				"CD": 3
+			"externalSignalSelectModeList": {
+				"OPTIONS": {
+					"CTS": 0,
+					"DSR": 1,
+					"RI": 2,
+					"CD": 3
+				}
 			},
+			"ID_CONTROL_LIST": [
+				"clockList",
+				"transmissionModeList",
+				"lineEncondingModeList",
+				"frameSyncModeList",
+				"numberOfSyncBytesMode",
+				"numberOfTerminationBytesMode",
+				"crcFrameCheckModeList",
+				"addressModeList",
+				"externalSignalSelectModeList"
+			],
 			"DEFAULT_BITS": {
-				"CLOCK_MODE": 1,
-				"TRANSMISSION_MODE": 0,
-				"LINE_ENCODING_MODE": 0,
-				"FRAME_SYNC_MODE": 0,
-				"SHARE_FLAG": false,
-				"INTER_FRAME_TIME_FILL": false,
-				"NUMBER_OF_SYNC_BYTES": 1,
-				"NUMBER_OF_TERMINATION_BYTES": 1,
-				"MASKED_INTERRUPTS_VISIBLE": false,
-				"CRC_FRAME_CHECK_MODE": 1,
-				"ORDER_OF_BYTES": false,
-				"ADDRES_MODE": 0,
-				"RECEIVER_DISABLED": false,
-				"EXTERNAL_SIGNAL_MODE": 0,
-				"CLOCK_FREQUENCY":18432000
+				"clockList": 1,
+				"transmissionModeList": 0,
+				"lineEncondingModeList": 0,
+				"frameSyncModeList": 0,
+				"shareFlagMode": false,
+				"interframeTimeFillMode": false,
+				"numberOfSyncBytesMode": 1,
+				"numberOfTerminationBytesMode": 1,
+				"maskedInterruptsMode": false,
+				"crcFrameCheckModeList": 1,
+				"msbMode": false,
+				"addressModeList": 0,
+				"receiverDisabledMode": false,
+				"externalSignalSelectModeList": 0,
+				"CLOCK_FREQUENCY": 18432000
 			}
 		}
-	},
-	"TIPS":{
-		"CLOCK_MODE": {
-				"CLOCK_MODE_0": "Recepcion: RxClk, Transmision: TxClk ",
-				"CLOCK_MODE_1": "Recepcion: RxClk  , Transmision: BGR Interno",
-				"CLOCK_MODE_2": "Recepcion: RxClk, Transmision: RxClk",
-				"CLOCK_MODE_3": "Recepcion: DPLL + BGR, Transmision: TxClk",
-				"CLOCK_MODE_4": "Recepcion: DPLL + BGR, Transmision: BGR Interno / 16",
-				"CLOCK_MODE_5": "Recepcion: DPLL + BGR, Transmision: DPLL + BGR",
-				"CLOCK_MODE_6": "Recepcion: BGR Interno, Transmision: TxClk",
-				"CLOCK_MODE_7": "Recepcion: BGR Interno, Transmision: BGR Interno. \r\n Advertencia: Solo habilitar este modo con la recepcion desactivada"
-			},
-		"TRANSMISSION_MODE": {
-				"ENABLE_HDCL": "Protocolo HDCL",
-				"ENABLE_X_SYNC": "Protocolo X_SYNC propietario de Fastcomm",
-				"ENABLE_TRANSPARENT": "Sin protocolo, control por señales Frame Sync"
-			},
-		"FRAME_SYNC_MODE": {
-				"NO_FSYNC": 0,
-				"MODE_1": "La señal de sincronización enmarca completamente los datos",
-				"MODE_2": "La señal de sincronización se encuentra al comienzo de los datos",
-				"MODE_3": "La señal de sincronización se encuentra al final de los datos",
-				"MODE_2&3": "",
-				"MODE_5": "similar al modo 1, excepto que hay independientes controles para el borde anterior y posterior de la señal FST"
-			}
 	}
 }

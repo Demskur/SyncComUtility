@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.Collection;
@@ -29,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -53,8 +55,8 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	boolean viewAsText = true;
 	Registers registers = new Registers();
 	Register CCR0;
-	Map<String, Object> actionHistory = new LinkedHashMap<>();
 	JSONFXLoader parameterLoader = JSONFXLoader.getInstance();
+	Map<String, Object> actionHistory = parameterLoader.getHistory();
 
 	public static class QueueEvent {
 		public enum QueueEventType {
@@ -477,7 +479,7 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 
 	@FXML
 	void onResetToDefaultCCR0(ActionEvent event) {
-		setAllControlls(((Map<?, ?>) CCR0.get("DEFAULT_BITS")));
+		setAllControlls(CCR0.getDefaultState());
 	}
 
 	@FXML
@@ -512,24 +514,48 @@ public class ControllerFx implements EventQueue.EventProcess<ControllerFx.QueueE
 	@FXML
 	private void initialize() {
 		CCR0 = parameterLoader.getRegister(AVAILABLE_REGS.CCR0);
-		clockList.getItems().setAll(CCR0.getOptionAsArray(CLOCK_MODE));
-		
-		clockList.getItems().setAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CLOCK_MODE)).keySet());
-		transmissionModeList.getItems()
-				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(TRANSMISSION_MODE)).keySet());
-		lineEncondingModeList.getItems()
-				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(LINE_ENCODING_MODE)).keySet());
-		frameSyncModeList.getItems()
-				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(FRAME_SYNC_MODE)).keySet());
-		numberOfSyncBytesMode.getItems()
-				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_SYNC_BYTES)).keySet());
-		numberOfTerminationBytesMode.getItems()
-				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(NUMBER_OF_TERMINATION_BYTES)).keySet());
-		crcFrameCheckModeList.getItems()
-				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(CRC_FRAME_CHECK_MODE)).keySet());
-		addressModeList.getItems().addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(ADDRES_MODE)).keySet());
-		externalSignalSelectModeList.getItems()
-				.addAll((Collection<? extends String>) ((Map<?, ?>) CCR0.get(EXTERNAL_SIGNAL_MODE)).keySet());
+		clockList.getItems().addAll(CCR0.getOptionAsArray(CLOCK_MODE));
+		transmissionModeList.getItems().addAll(CCR0.getOptionAsArray((TRANSMISSION_MODE)));
+		lineEncondingModeList.getItems().addAll(CCR0.getOptionAsArray((LINE_ENCODING_MODE)));
+		frameSyncModeList.getItems().addAll(CCR0.getOptionAsArray((FRAME_SYNC_MODE)));
+		numberOfSyncBytesMode.getItems().addAll(CCR0.getOptionAsArray((NUMBER_OF_SYNC_BYTES)));
+		numberOfTerminationBytesMode.getItems().addAll(CCR0.getOptionAsArray((NUMBER_OF_TERMINATION_BYTES)));
+		crcFrameCheckModeList.getItems().addAll(CCR0.getOptionAsArray((CRC_FRAME_CHECK_MODE)));
+		addressModeList.getItems().addAll(CCR0.getOptionAsArray((ADDRES_MODE)));
+		externalSignalSelectModeList.getItems().addAll(CCR0.getOptionAsArray((EXTERNAL_SIGNAL_MODE)));
+		Field[] classControlls = this.getClass().getDeclaredFields();
+		for (Field field : classControlls) {
+			if (field.getType() == ComboBox.class) {
+				try {
+					ComboBox<String> cb = (ComboBox<String>) field.get(this);
+					if (CCR0.isAvailableID(cb.getId())) {
+						cb.setCellFactory(params -> {
+							return new ListCell<String>() {
+								@Override
+								public void updateItem(String item, boolean empty) {
+									super.updateItem(item, empty);
+									if (item != null) {
+										setText(item);
+										setTooltip(new Tooltip(CCR0.getTipByID(cb.getId(), item)));
+									} else {
+										setTooltip(null);
+									}
+								}
+							};
+						});
+					}
+
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
+		;
 		setAllControlls(parameterLoader.getHistory());
 	}
 

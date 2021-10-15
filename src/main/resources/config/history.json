@@ -1,1 +1,21 @@
-{"CLOCK_MODE":1,"TRANSMISSION_MODE":0,"LINE_ENCODING_MODE":0,"FRAME_SYNC_MODE":0,"SHARE_FLAG":false,"INTER_FRAME_TIME_FILL":false,"NUMBER_OF_SYNC_BYTES":1,"NUMBER_OF_TERMINATION_BYTES":1,"MASKED_INTERRUPTS_VISIBLE":false,"CRC_FRAME_CHECK_MODE":1,"ORDER_OF_BYTES":false,"ADDRES_MODE":0,"RECEIVER_DISABLED":false,"EXTERNAL_SIGNAL_MODE":0,"HMI_VIEW_AS_BIN":true,"HMI_VIEW_AS_HEX":true,"HMI_ENABLE_CF":true,"HMI_ENABLE_LF":true,"HMI_VIEW_AS_ASCII":true}
+{
+	"clockList": 1,
+	"transmissionModeList": 0,
+	"lineEncondingModeList": 0,
+	"frameSyncModeList": 0,
+	"shareFlagMode": false,
+	"interframeTimeFillMode": false,
+	"numberOfSyncBytesMode": 1,
+	"numberOfTerminationBytesMode": 1,
+	"maskedInterruptsMode": false,
+	"crcFrameCheckModeList":  1,
+	"msbMode": false,
+	"addressModeList": 0,
+	"receiverDisabledMode": false,
+	"externalSignalSelectModeList":  0,
+	"HMI_VIEW_AS_BIN": true,
+	"HMI_VIEW_AS_HEX": true,
+	"HMI_ENABLE_CF": true,
+	"HMI_ENABLE_LF": true,
+	"HMI_VIEW_AS_ASCII": true
+}
