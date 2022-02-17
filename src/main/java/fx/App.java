@@ -1,5 +1,7 @@
 package main.java.fx;
 
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -26,7 +28,8 @@ public class App extends Application {
 //		regs.CCR0 = 0x00112004;
 //		SYNCCOM_Loader.SYNCCOM_SET_REGISTERS(regs);
 //		SYNCCOM_Loader.setClockFrequency(19132000);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fx/principal.fxml"));// new
+		URL template = getClass().getResource("/fx/principal.fxml");
+		FXMLLoader loader = new FXMLLoader(template);
 																										// File("src/main/resources/fx/principal.fxml").toURI().toURL());
 		Parent rootPane = loader.load();
 		primaryStage.setScene(new Scene(rootPane));

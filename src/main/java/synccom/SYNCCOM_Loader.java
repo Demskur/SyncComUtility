@@ -19,23 +19,6 @@ public class SYNCCOM_Loader {
 		/// <directory>src/main/resources</directory>
 		String relativeDllPath = "/dll/fastcomdll.dll";
 		System.load(JSONFXLoader.getInstance().getFolderPath(relativeDllPath));
-
-//		try {
-//			URL resource = SYNCCOM_Loader.class.getResource(relativeDllPath);
-//			String path = resource.toURI().toURL().getPath();
-//			if (resource != null && path.lastIndexOf("!") == -1)
-//				System.load(path);
-//			else {
-//				String pathName = SYNCCOM_Loader.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-//				pathName = pathName.substring(0,pathName.lastIndexOf("/") );
-//				System.load(pathName + relativeDllPath);
-//			}
-//
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		} catch (URISyntaxException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	public static native int init();
