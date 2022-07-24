@@ -22,6 +22,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		JSONFXLoader.getInstance();
+
 		SYNCCOM_Loader.init();
 		SYNCCOMRegisters regs = new SYNCCOMRegisters();
 //		regs.BGR = 0;

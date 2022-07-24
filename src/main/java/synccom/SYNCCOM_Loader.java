@@ -4,7 +4,6 @@
 package main.java.synccom;
 
 import java.util.ArrayList;
-
 import main.java.util.JSONFXLoader;
 
 /**
@@ -13,12 +12,14 @@ import main.java.util.JSONFXLoader;
  */
 public class SYNCCOM_Loader {
 	static {
-//		File dll = new File("src/main/resources/dll/fastcomdll.dll");
-		// System.load(dll.getAbsolutePath());
-		/// dll/fastcomdll.dll funciona porque esta puesto
-		/// <directory>src/main/resources</directory>
-		String relativeDllPath = "/dll/fastcomdll.dll";
+		String relativeDllPath = "/dll/lib64fastcom.dll";
 		System.load(JSONFXLoader.getInstance().getFolderPath(relativeDllPath));
+		
+		try {
+			System.load(JSONFXLoader.getInstance().getFolderPath(relativeDllPath));
+		} catch (UnsatisfiedLinkError e) {
+			System.out.print(e);
+		}
 	}
 
 	public static native int init();
