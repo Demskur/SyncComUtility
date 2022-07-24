@@ -3,8 +3,8 @@
  */
 package main.java.synccom;
 
+import java.io.File;
 import java.util.ArrayList;
-
 import main.java.util.JSONFXLoader;
 
 /**
@@ -13,29 +13,13 @@ import main.java.util.JSONFXLoader;
  */
 public class SYNCCOM_Loader {
 	static {
-//		File dll = new File("src/main/resources/dll/fastcomdll.dll");
-		// System.load(dll.getAbsolutePath());
-		/// dll/fastcomdll.dll funciona porque esta puesto
-		/// <directory>src/main/resources</directory>
-		String relativeDllPath = "/dll/fastcomdll.dll";
-		System.load(JSONFXLoader.getInstance().getFolderPath(relativeDllPath));
+		String relativeDllPath = "/dll/lib64fastcom.dll";
+		try {
+			System.load(JSONFXLoader.getInstance().getFolderPath(relativeDllPath));
+		} catch (UnsatisfiedLinkError e) {
+			System.out.print(e);
+		}
 
-//		try {
-//			URL resource = SYNCCOM_Loader.class.getResource(relativeDllPath);
-//			String path = resource.toURI().toURL().getPath();
-//			if (resource != null && path.lastIndexOf("!") == -1)
-//				System.load(path);
-//			else {
-//				String pathName = SYNCCOM_Loader.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-//				pathName = pathName.substring(0,pathName.lastIndexOf("/") );
-//				System.load(pathName + relativeDllPath);
-//			}
-//
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		} catch (URISyntaxException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	public static native int init();
